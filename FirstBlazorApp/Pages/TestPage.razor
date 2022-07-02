@@ -6,12 +6,36 @@
 <h3>TestPage</h3>
 <p>Param1: @param1</p>
 <p>Param2: @param2</p>
+<p>@displaystring</p>
+
 <p><button @onclick="@GetParameters">Get querysting parameters</button></p>
+<p><button @onclick="@(()=>{navmanager.NavigateTo("/");})">Navigation using c#</button></p>
 
 <NavLink href="/testroute">to index using test route</NavLink>
 @code {
 	string param1;
 	string param2;
+	string displaystring = "";
+	protected override Task OnInitializedAsync()
+	{
+		displaystring += "on initialized \n";
+		return base.OnInitializedAsync();
+	}
+	protected override Task OnAfterRenderAsync(bool firstRender)
+	{
+		if(firstRender)
+		{
+			displaystring += "on after render \n";
+			StateHasChanged();
+		}
+
+		return base.OnAfterRenderAsync(firstRender);
+	}
+	protected override Task OnParametersSetAsync()
+	{
+		displaystring += "on parameters \n";
+		return base.OnParametersSetAsync();
+	}
 
 	void GetParameters()
 	{

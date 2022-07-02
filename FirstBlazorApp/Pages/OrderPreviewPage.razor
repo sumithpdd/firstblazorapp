@@ -1,0 +1,11 @@
+﻿@page "/orderpreviewpage"
+<h3>OrderPreviewPage</h3>
+<p>Units: @CurrentOrder.Units</p>
+<p>Total: @CurrentOrder.Total</p>
+<p>Address</p>
+	<p>: @CurrentOrder.ShippingAddress</p>
+<p><button>Confirm</button></p>
+
+@code {
+	OrderModel CurrentOrder = SharedData.OrderForPreview;
+}

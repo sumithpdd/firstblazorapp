@@ -1,0 +1,36 @@
+﻿@page "/orderformpage"
+@*@page "/orderformpage/{ItemId}/{UnitPrice}"*@
+@inject NavigationManager nav
+
+<h3>OrderFormPage</h3>
+<div style="margin-left:20px;">
+	<p>Item id</p>
+	<p><input @bind="@CurrentOrder.ItemId"/></p>
+	<p>Unit price</p>
+	<p><input @bind-value="@CurrentOrder.UnitPrice" @bind-value:event="oninput"/></p>
+	<p>Units</p>
+	<p><input @bind-value="@CurrentOrder.Units" @bind-value:event="oninput"/></p>
+	<p>Total : $"@CurrentOrder.Total"</p>
+	<p>Shipping Address</p>
+	<p><textarea @bind="@CurrentOrder.ShippingAddress"/></p>
+	<p>Details</p>
+	<p><textarea @bind="@CurrentOrder.Details"/></p>
+	<p><button @onclick="@(async ()=> await ToPreview())">Preview Order</button></p>
+
+</div>
+
+@code {
+	OrderModel CurrentOrder = new OrderModel();
+	//[Parameter]
+	//public string ItemId { get { return ItemId; } set { CurrentOrder.ItemId = ItemId; } }
+	//[Parameter]
+	//public string UnitPrice{ get { return UnitPrice; } set { CurrentOrder.UnitPrice =10; } } 
+
+
+	Task ToPreview()
+	{
+		SharedData.OrderForPreview = CurrentOrder;
+		nav.NavigateTo("/orderpreviewpage");
+		return Task.CompletedTask;
+	}
+}
