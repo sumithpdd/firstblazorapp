@@ -1,0 +1,22 @@
+﻿@page "/"
+@page "/testroute"
+
+<PageTitle>Index</PageTitle>
+
+<h1>Hello, world!</h1>
+
+Welcome to your new app.
+
+<SurveyPrompt Title="How is Blazor working for you?" />
+
+<Counter IncrementAmount="10"  />
+<br/>
+<textarea @bind-value="@text" @bind-value:event="oninput" style="width:300px; height:200px;"/>
+
+<p>Lenght: @text.Length</p>
+<p><button @onclick="@(()=>{text ="";})">Clear</button></p>
+
+<p><a href="/testpage?param1=sumith&param2=damodaran">To Test Page</a></p>
+@code{
+	string text = "";
+}

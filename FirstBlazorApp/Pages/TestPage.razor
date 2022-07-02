@@ -1,0 +1,25 @@
+﻿@page "/testpage"
+@*@page "/testpage/{param1}/{param2}"*@
+@inject NavigationManager navmanager;
+@using System.Web;
+
+<h3>TestPage</h3>
+<p>Param1: @param1</p>
+<p>Param2: @param2</p>
+<p><button @onclick="@GetParameters">Get querysting parameters</button></p>
+
+<NavLink href="/testroute">to index using test route</NavLink>
+@code {
+	string param1;
+	string param2;
+
+	void GetParameters()
+	{
+	var aburi = new Uri(navmanager.Uri);
+	var qparams = HttpUtility.ParseQueryString(aburi.Query);
+	param1 = qparams["param1"];
+	param2 = qparams["param2"];	
+	}
+	
+
+}
