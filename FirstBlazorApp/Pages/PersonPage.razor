@@ -1,0 +1,36 @@
+﻿@page "/personpage"
+<h3>Person Page</h3>
+<div style="padding :70px;border:3px solid #000000 ;margin-left:20px;">
+	<p>Name</p>
+	<p><input @bind="@NewPerson.Name"/></p>
+	<p>Age</p>
+	<p><input @bind="@NewPerson.Age"  /></p>
+	<p>Gender</p>
+	<p><input @bind="@NewPerson.Gender" type="range" min="1" max="2" style="width:35px;"/></p>
+	 
+	<p><button @onclick="@(() => { Person.Add(NewPerson); NewPerson = new PersonModel() {Id = Guid.NewGuid().ToString(),Gender =1};})">Add New Person</button></p>
+
+<table>
+	<thead>
+		<tr>
+			<td>Name</td>
+			<td>Age</td>
+			<td>Gender</td>
+			<td> </td>
+		</tr>
+	</thead>
+	<tbody>
+		@foreach (var item in Person  )
+		{
+			<PersonListItem Person="@item" onRemove="@((id) => Person.Remove(Person.Find(x => x.Id == id )))"></PersonListItem>
+		}
+	</tbody>
+</table>
+</div>
+
+
+@code {
+	List<PersonModel> Person = new List<PersonModel>();
+	PersonModel NewPerson = new PersonModel()
+	{Id = Guid.NewGuid().ToString(),Gender =1};
+}

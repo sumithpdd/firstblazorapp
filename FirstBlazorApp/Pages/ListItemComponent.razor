@@ -1,0 +1,14 @@
+﻿ 
+@if(Item != null)
+{
+	<tr>
+		<td>@Item.ItemId</td>
+		<td>@Item.AskingPrice</td>
+		<td>@Item.Units</td>
+		<td>@Item.Total</td>
+	</tr>
+}
+@code {
+	[Parameter]
+	public ItemModel Item{ get; set; }
+}

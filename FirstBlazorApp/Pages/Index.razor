@@ -17,6 +17,35 @@ Welcome to your new app.
 <p><button @onclick="@(()=>{text ="";})">Clear</button></p>
 
 <p><a href="/testpage?param1=sumith&param2=damodaran">To Test Page</a></p>
+
+<NewItemSetupComponent @key="@tempid" onItemSubmit="@(async (item)=> await InsertNewItem(item))"></NewItemSetupComponent>
+<table>
+	<thead>
+		<tr>
+			<td>Item id</td>
+			<td>Asking price</td>
+			<td>Units</td>
+			<td>Total</td>
+		</tr>
+	</thead>
+	<tbody>
+		@foreach (var item in Items.OrderBy(x=>x.ItemId))
+		{
+			<ListItemComponent Item="@item"></ListItemComponent>
+		}
+	</tbody>
+</table>
+
 @code{
 	string text = "";
+	string tempid = Guid.NewGuid().ToString();
+	List<ItemModel> Items = new List<ItemModel>();
+
+
+	Task InsertNewItem(ItemModel newitem)
+	{
+		Items.Add(newitem);
+		tempid  = Guid.NewGuid().ToString();
+		return Task.CompletedTask;
+	}
 }

@@ -1,0 +1,28 @@
+﻿ 
+@if(Person != null)
+{
+	<tr>
+		<td>@Person.Name</td>
+		<td>@Person.Age</td>
+		@switch (Person.Gender)
+		{
+			case 1:
+				<td>M</td>
+				break;
+case 2:
+				<td>F</td>
+				break;
+default:
+				<td>N/A</td>
+				break;
+
+		}
+		 
+	</tr>
+}
+@code {
+	[Parameter]
+	public PersonModel Person{ get; set; }
+	[Parameter]
+	public EventCallback<string> onRemove{ get; set; }
+} 

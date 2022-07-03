@@ -1,0 +1,18 @@
+﻿<h3>NewItemSetupComponent</h3>
+<div style="padding :70px;border:3px solid #000000 ;margin-left:20px;">
+	<p>Item id</p>
+	<p><input @bind="@CurrentItem.ItemId"/></p>
+	<p>Asking price</p>
+	<p><input @bind-value="@CurrentItem.AskingPrice" @bind-value:event="oninput"/></p>
+	<p>Units</p>
+	<p><input @bind-value="@CurrentItem.Units" @bind-value:event="oninput"/></p>
+	<p>Total : $"@CurrentItem.Total"</p> 
+	<p><button @onclick="@(async ()=> await onItemSubmit.InvokeAsync(CurrentItem))">Submit Order</button></p>
+
+</div>
+@code {
+	ItemModel CurrentItem = new ItemModel();
+	[Parameter]
+	public EventCallback<ItemModel> onItemSubmit { get; set; }
+
+}
