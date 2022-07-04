@@ -23,8 +23,7 @@ app.UseHttpsRedirection();
 
 app.UseStaticFiles();
 
-app.UseRouting();
-
+app.UseRouting(); 
 app.MapBlazorHub();
 app.MapFallbackToPage("/_Host");
 
